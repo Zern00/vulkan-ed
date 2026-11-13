@@ -1,0 +1,17 @@
+#version 450
+
+layout(local_size_x = 1) in;
+
+layout(std140, set = 0, binding = 0) uniform Params {
+    vec4 multiplier;
+    vec4 bias;
+} params;
+
+layout(std430, set = 0, binding = 1) buffer Result {
+    vec4 value;
+} result;
+
+void main() {
+    vec4 inputValue = vec4(0.25, 0.5, 0.75, 1.0);
+    result.value = inputValue * params.multiplier + params.bias;
+}
